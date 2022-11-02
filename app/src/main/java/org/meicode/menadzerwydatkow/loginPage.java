@@ -16,8 +16,8 @@ public class loginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        final EditText Login = findViewById(R.id.entryLogin);
-        final EditText Password = findViewById(R.id.entryPassword);
+        final EditText Login = findViewById(R.id.Login);
+        final EditText Password = findViewById(R.id.Password);
 
         final Button LoginBtn = findViewById(R.id.zalogujBtn);
         final Button RegisterBtn = findViewById(R.id.zarejestrujBtn);
@@ -36,5 +36,12 @@ public class loginPage extends AppCompatActivity {
                 }
             }
         });
+        RegisterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(loginPage.this, registerPage.class));
+            }
+        });
+
     }
 }

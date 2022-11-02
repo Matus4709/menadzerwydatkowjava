@@ -10,17 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Menadzerwydatkow">
         <activity
-            android:name=".ustawieniaPage"
+            android:name=".dodajWydatekPage"
             android:exported="false"
             android:theme="@style/Theme.Menadzerwydatkow.NoActionBar"/>
+        <activity
+            android:name=".registerPage"
+            android:exported="false"
+            android:theme="@style/Theme.Menadzerwydatkow.NoActionBar" />
+        <activity
+            android:name=".ustawieniaPage"
+            android:exported="false"
+            android:theme="@style/Theme.Menadzerwydatkow.NoActionBar" />
         <activity
             android:name=".statystykiPage"
             android:exported="false"
-            android:theme="@style/Theme.Menadzerwydatkow.NoActionBar"/>
+            android:theme="@style/Theme.Menadzerwydatkow.NoActionBar" />
         <activity
             android:name=".wydatkiPage"
             android:exported="false"
-            android:theme="@style/Theme.Menadzerwydatkow.NoActionBar"/>
+            android:theme="@style/Theme.Menadzerwydatkow.NoActionBar" />
         <activity
             android:name=".startPage"
             android:exported="false"
@@ -35,9 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

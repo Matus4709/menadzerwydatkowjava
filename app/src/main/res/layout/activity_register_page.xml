@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginPage">
-
-
+    tools:context=".registerPage">
 
     <LinearLayout
         android:layout_width="272dp"
@@ -18,30 +16,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/Login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.459"
-            app:srcCompat="@drawable/logo" />
+            android:layout_marginTop="20dp"
+            android:text="REJESTRACJA"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/Login"
+            android:id="@+id/regMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="150dp"
+            android:ems="10"
+            android:hint="E-Mail"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/regLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Login"
             android:inputType="textPersonName"
             android:textAlignment="center" />
 
         <EditText
-            android:id="@+id/Password"
+            android:id="@+id/regPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -49,18 +53,20 @@
             android:inputType="textPassword"
             android:textAlignment="center" />
 
-        <Button
-            android:id="@+id/zalogujBtn"
+        <EditText
+            android:id="@+id/regCoPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:text="Zaloguj" />
+            android:ems="10"
+            android:hint="Potwierdź hasło"
+            android:inputType="textPassword"
+            android:textAlignment="center" />
 
         <Button
-            android:id="@+id/zarejestrujBtn"
+            android:id="@+id/regBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:text="Zarejestruj" />
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

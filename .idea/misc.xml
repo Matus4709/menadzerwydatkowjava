@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_dodaj_wydatek_page.xml" value="0.3625" />
         <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_home_page.xml" value="0.3625" />
-        <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_login_page.xml" value="0.3625" />
-        <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_start_page.xml" value="0.3625" />
+        <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_login_page.xml" value="0.3569230769230769" />
+        <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_register_page.xml" value="0.1" />
+        <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_start_page.xml" value="0.5" />
         <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_statystyki_page.xml" value="0.3625" />
-        <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_ustawienia_page.xml" value="0.3625" />
+        <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_ustawienia_page.xml" value="0.1" />
         <entry key="..\:/ProjektMobilne/menadzerwydatkow/app/src/main/res/layout/activity_wydatki_page.xml" value="0.3625" />
       </map>
     </option>
