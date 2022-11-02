@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ustawieniaPage">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="350dp"
         android:layout_height="82dp"
         android:orientation="vertical"
@@ -54,7 +56,39 @@
                 android:gravity="center"
                 android:text="USTAWIENIA"
                 android:textSize="16sp" />
+
         </LinearLayout>
+
     </LinearLayout>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="198dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:text="Tryb ciemny"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:background="@color/black"
+        android:backgroundTint="#778899"
+        android:text="Wyloguj"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:icon="@drawable/logout_icon_151219__1_"
+        app:iconTint="#100404"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="#CAB6B6"
+        app:strokeColor="#F6F1F1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
