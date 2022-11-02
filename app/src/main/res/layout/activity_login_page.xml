@@ -54,13 +54,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:background="#DC0000"
+            android:background="@color/teal_200"
             android:text="Zaloguj" />
 
         <Button
             android:id="@+id/zarejestrujBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:text="Zarejestruj" />
 
     </LinearLayout>

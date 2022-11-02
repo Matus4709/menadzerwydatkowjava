@@ -67,6 +67,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="50dp"
         android:text="Tryb ciemny"
+        android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
         app:layout_constraintStart_toStartOf="@+id/linearLayout3"
