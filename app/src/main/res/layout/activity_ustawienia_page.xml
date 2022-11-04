@@ -90,6 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="#CAB6B6"
-        app:strokeColor="#F6F1F1" />
+        app:strokeColor="#F6F1F1"
+        android:onClick="logout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class ustawieniaPage extends AppCompatActivity {
 
     @Override
@@ -45,5 +47,12 @@ public class ustawieniaPage extends AppCompatActivity {
             }
         });
         //KONIEC NAWIGACJI
+    }
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(),loginPage
+                .class));
+        finish();
     }
 }

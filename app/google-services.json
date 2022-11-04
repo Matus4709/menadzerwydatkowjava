@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "580330871019",
+    "project_id": "menadzerwydatkow-5b241",
+    "storage_bucket": "menadzerwydatkow-5b241.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580330871019:android:725aeb1c5073e0aa5006ae",
+        "android_client_info": {
+          "package_name": "org.meicode.menadzerwydatkow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "580330871019-h4cv4m1b484ej7q43uln45r8m8q1htp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTLhsS8XLKxKF28UD1KOV0-nzpu_1rZfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "580330871019-h4cv4m1b484ej7q43uln45r8m8q1htp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
