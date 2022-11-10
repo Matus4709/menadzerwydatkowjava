@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Time">
+        <item>Dzisiaj</item>
+        <item>W tym tygodniu</item>
+        <item>W tym miesiącu</item>
+
+    </string-array>
+
+
+</resources>
