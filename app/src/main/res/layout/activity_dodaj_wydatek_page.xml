@@ -23,21 +23,21 @@
 
             <TextView
                 android:id="@+id/navStart"
-                android:layout_width="wrap_content"
+                android:layout_width="56dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="START"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/navWydatki"
-                android:layout_width="wrap_content"
+                android:layout_width="69dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="WYDATKI"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/navStatystyki"
@@ -46,7 +46,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="STATYSTYKI"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/navUstawienia"
@@ -55,7 +55,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="USTAWIENIA"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -66,13 +66,13 @@
         android:layout_width="347dp"
         android:layout_height="282dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/button_dodaj_wydatek"
+        app:layout_constraintBottom_toTopOf="@+id/DodajWydatekButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
-            android:id="@+id/textView_nazwa_wydatku"
+            android:id="@+id/NazwaWydatku"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Podaj nazwe wydatku" />
@@ -85,20 +85,20 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView_kategoria"
+            android:id="@+id/KategoriaWydatku"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Podaj kategorie" />
 
         <EditText
-            android:id="@+id/Kategoria"
+            android:id="@+id/kategoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="date" />
+            android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView_suma"
+            android:id="@+id/KwotaWydatku"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Podaj sume" />
@@ -111,13 +111,13 @@
             android:inputType="number" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/Zdjecie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Wyślij zdjęcie " />
 
         <Button
-            android:id="@+id/przycisk_wybierz_zdjecie"
+            android:id="@+id/ZdjecieButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Wybierz zdjęcie" />
@@ -125,7 +125,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_dodaj_wydatek"
+        android:id="@+id/DodajWydatekButton"
         android:layout_width="216dp"
         android:layout_height="78dp"
         android:layout_marginBottom="164dp"
