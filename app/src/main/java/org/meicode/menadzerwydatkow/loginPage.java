@@ -15,8 +15,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class loginPage extends AppCompatActivity {
 
+public class loginPage extends AppCompatActivity {
     EditText Login, Password;
     Button LoginBtn;
     FirebaseAuth fAuth;
@@ -31,51 +31,43 @@ public class loginPage extends AppCompatActivity {
         fAuth           = FirebaseAuth.getInstance();
         LoginBtn        = findViewById(R.id.zalogujBtn);
 
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            startActivity(new Intent(loginPage.this, fpPage.class));
+        }
+        else {
+            final Button RegisterBtn = findViewById(R.id.zarejestrujBtn);
+            LoginBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        final Button RegisterBtn = findViewById(R.id.zarejestrujBtn);
+                    String email = Login.getText().toString().trim();
+                    String password = Password.getText().toString().trim();
 
-
-        LoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = Login.getText().toString().trim();
-                String password = Password.getText().toString().trim();
-
-                if(email.isEmpty() || password.isEmpty()){
-                    Toast.makeText(loginPage.this, "Wprowadź dane logowania!", Toast.LENGTH_SHORT).show();
-                }
-
-                //authenticate the user
-
-                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                       if(task.isSuccessful()){
-                           Toast.makeText(loginPage.this, "Zalogowano", Toast.LENGTH_SHORT).show();
-                           startActivity(new Intent(getApplicationContext(),fpPage.class));
-                       }else {
-                           Toast.makeText(loginPage.this, "Błąd logowania! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                       }
-
+                    if(email.isEmpty() || password.isEmpty()){
+                        Toast.makeText(loginPage.this, "Wprowadź dane logowania!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(loginPage.this, loginPage.class));
                     }
-                });
 
-
-            }
-        });
-
-
-
-
-
-
-
-        RegisterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(loginPage.this, registerPage.class));
-            }
-        });
-
+                    //authenticate the user
+                    fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(loginPage.this, "Zalogowano", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(),fpPage.class));
+                            }else {
+                                Toast.makeText(loginPage.this, "Błąd logowania! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            });
+            RegisterBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(loginPage.this, registerPage.class));
+                }
+            });
+        }
     }
 }
