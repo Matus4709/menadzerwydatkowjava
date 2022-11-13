@@ -17,8 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Calendar;
+import java.util.Date;
 
 public class dodajWydatekPage extends AppCompatActivity {
 
@@ -38,7 +42,7 @@ public class dodajWydatekPage extends AppCompatActivity {
         kategoria       = findViewById(R.id.kategoria);
         kwota           = findViewById(R.id.Suma);
         dodajWydatekBtn = findViewById(R.id.DodajWydatekButton);
-
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
         fStore = FirebaseFirestore.getInstance();
         fAuth  = FirebaseAuth.getInstance();
@@ -83,17 +87,21 @@ public class dodajWydatekPage extends AppCompatActivity {
                 String nazwaWdk = nazwaWydatku.getText().toString();
                 String category = kategoria.getText().toString();
                 String suma = kwota.getText().toString();
+                String data = currentDate.toString();
                 userID = fAuth.getCurrentUser().getUid();
                 DocumentReference docReference = fStore.collection("users").document(userID).collection("wydatki").document();
                 Map<String, Object> wydatek = new HashMap<>();
                 wydatek.put("Nazwa",nazwaWdk);
                 wydatek.put("Kategoria", category);
                 wydatek.put("Kwota",suma);
+                wydatek.put("Data",data);
+
                 docReference.set(wydatek).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d(TAG, "Wydatek zapisany!");
                         startActivity(new Intent(getApplicationContext(),startPage.class));
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
