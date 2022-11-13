@@ -42,7 +42,8 @@ public class dodajWydatekPage extends AppCompatActivity {
         kategoria       = findViewById(R.id.kategoria);
         kwota           = findViewById(R.id.Suma);
         dodajWydatekBtn = findViewById(R.id.DodajWydatekButton);
-        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        //String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        Date currentTime = Calendar.getInstance().getTime();
 
         fStore = FirebaseFirestore.getInstance();
         fAuth  = FirebaseAuth.getInstance();
@@ -87,7 +88,7 @@ public class dodajWydatekPage extends AppCompatActivity {
                 String nazwaWdk = nazwaWydatku.getText().toString();
                 String category = kategoria.getText().toString();
                 String suma = kwota.getText().toString();
-                String data = currentDate.toString();
+                Date data = currentTime;
                 userID = fAuth.getCurrentUser().getUid();
                 DocumentReference docReference = fStore.collection("users").document(userID).collection("wydatki").document();
                 Map<String, Object> wydatek = new HashMap<>();
