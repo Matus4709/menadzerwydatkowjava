@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,7 +25,27 @@ import java.util.Map;
 import java.util.Calendar;
 import java.util.Date;
 
-public class dodajWydatekPage extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+
+public class dodajWydatekPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+
 
     public static final String TAG = "Wydatek";
     EditText nazwaWydatku,kategoria,kwota;
@@ -48,38 +69,21 @@ public class dodajWydatekPage extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         fAuth  = FirebaseAuth.getInstance();
 
-        //NAWIGACJA
-        final TextView Start = findViewById(R.id.navStart);
-        final TextView Wydatki = findViewById(R.id.navWydatki);
-        final TextView Statystyki = findViewById(R.id.navStatystyki);
-        final TextView Ustawienia = findViewById(R.id.navUstawienia);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.toolbar);
 
-        Start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(dodajWydatekPage.this, startPage.class));
-            }
-        });
-        Wydatki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(dodajWydatekPage.this, wydatkiPage.class));
-            }
-        });
-        Statystyki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(dodajWydatekPage.this, statystykiPage.class));
-            }
-        });
-        Ustawienia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(dodajWydatekPage.this, ustawieniaPage.class));
-            }
-        });
-        //KONIEC NAWIGACJI
 
+        setSupportActionBar(toolbar);
+
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        navigationView.setCheckedItem(R.id.nav_start);
 
         //Dodawanie wydatku
         dodajWydatekBtn.setOnClickListener(new View.OnClickListener() {
@@ -115,5 +119,49 @@ public class dodajWydatekPage extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+
+            super.onBackPressed();
+
+        }
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+
+            case R.id.nav_wydatki:
+                Intent a = new Intent(dodajWydatekPage.this, wydatkiPage.class);
+                startActivity(a);
+                break;
+
+            case R.id.nav_statystyki:
+                Intent b = new Intent(dodajWydatekPage.this, statystykiPage.class);
+                startActivity(b);
+                break;
+
+            case R.id.nav_ustawienia:
+                Intent c = new Intent(dodajWydatekPage.this, ustawieniaPage.class);
+                startActivity(c);
+                break;
+
+            case R.id.nav_start:
+                Intent d = new Intent(dodajWydatekPage.this, startPage.class);
+                startActivity(d);
+                break;
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return true;
     }
 }

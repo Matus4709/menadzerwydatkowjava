@@ -1,80 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startPage">
+    tools:context=".startPage"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="350dp"
-        android:layout_height="82dp"
-        android:orientation="vertical"
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu"
+        android:layout_gravity="start">
+
+    </com.google.android.material.navigation.NavigationView>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:title="@string/start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_menu"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/navStart"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="START"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/navWydatki"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="WYDATKI"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/navStatystyki"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="STATYSTYKI"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/navUstawienia"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="USTAWIENIA"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="342dp"
         android:layout_height="63dp"
-        android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="0.449"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="98dp"
+        android:paddingTop="100dp">
+
 
         <TextView
             android:id="@+id/textSaldo"
-            android:layout_width="207dp"
-            android:layout_height="46dp"
+            android:layout_width="261dp"
+            android:layout_height="42dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="30dp"
             android:layout_weight="1"
@@ -93,32 +67,13 @@
             android:text="Dodaj Wydatek" />
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="453dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:layout_editor_absoluteX="-33dp" />
-
-    <ScrollView
-        android:layout_width="347dp"
-        android:layout_height="532dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
-        tools:layout_editor_absoluteX="30dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </ScrollView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+
+
+
+

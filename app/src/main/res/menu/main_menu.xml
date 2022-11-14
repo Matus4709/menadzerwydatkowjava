@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_start"
+            android:icon="@drawable/ic_start"
+            android:title="Strona główna" />
+
+        <item
+            android:id="@+id/nav_wydatki"
+            android:icon="@drawable/ic_wydatki"
+            android:title="Wydatki" />
+
+        <item
+            android:id="@+id/nav_statystyki"
+            android:icon="@drawable/ic_statystyki"
+            android:title="Statystyki" />
+
+        <item
+            android:id="@+id/nav_ustawienia"
+            android:icon="@drawable/ic_ustawienia"
+            android:title="Ustawienia" />
+
+
+    </group>
+
+
+
+</menu>

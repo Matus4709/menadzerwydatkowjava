@@ -1,77 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".ustawieniaPage">
+    tools:context=".ustawieniaPage"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu"
+        android:layout_gravity="start">
+
+    </com.google.android.material.navigation.NavigationView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:title="@string/ustawienia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_menu"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="350dp"
-        android:layout_height="82dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/navStart"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="START"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/navWydatki"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="WYDATKI"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/navStatystyki"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="STATYSTYKI"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/navUstawienia"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="USTAWIENIA"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="100dp">
 
     <Switch
         android:id="@+id/switch1"
         android:layout_width="198dp"
         android:layout_height="48dp"
-        android:layout_marginTop="50dp"
         android:text="Tryb ciemny"
-        android:textStyle="bold"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="132dp" />
 
     <Button
         android:id="@+id/button3"
@@ -92,5 +71,5 @@
         app:rippleColor="#CAB6B6"
         app:strokeColor="#F6F1F1"
         android:onClick="logout"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
