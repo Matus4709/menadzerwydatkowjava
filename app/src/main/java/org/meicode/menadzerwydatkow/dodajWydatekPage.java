@@ -13,8 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-
+import android.widget.Spinner;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
@@ -22,25 +21,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Calendar;
 import java.util.Date;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +56,10 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
     String userID;
     FirebaseAuth fAuth;
 
+    Spinner languageSpinner;
+    // on below line we are creating a variable for our list of data to be displayed in spinner.
+    String[] languages = {"Spożywcze","Podatki","Chemia"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +79,9 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
         //
 
         nazwaWydatku    = findViewById(R.id.Nazwa_wydatku);
-        kategoria       = findViewById(R.id.kategoria);
+        //spinner kategoria
+        Spinner spinner = (Spinner)findViewById(R.id.kategoriaspinner);
+        String textSpinner = spinner.getSelectedItem().toString();
         kwota           = findViewById(R.id.Suma);
         dodajWydatekBtn = findViewById(R.id.DodajWydatekButton);
         //String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
@@ -114,7 +111,7 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
             @Override
             public void onClick(View view) {
                 String nazwaWdk = nazwaWydatku.getText().toString();
-                String category = kategoria.getText().toString();
+                String category = textSpinner.toString();
                 String suma = kwota.getText().toString();
                 Date data = currentTime;
                 userID = fAuth.getCurrentUser().getUid();
