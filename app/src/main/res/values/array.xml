@@ -6,6 +6,17 @@
         <item>W tym miesiącu</item>
 
     </string-array>
-
+    <string-array name="kategorie">
+        <item>Żywność i napoje</item>
+        <item>Kredyty</item>
+        <item>Mieszkanie i opłaty</item>
+        <item>Transport i komunikacja</item>
+        <item>Chemia domowa</item>
+        <item>Zdrowie i uroda</item>
+        <item>Hobby i rozrywka</item>
+        <item>Urlop i wyjazdy</item>
+        <item>Odzież</item>
+        <item>Inne</item>
+    </string-array>
 
 </resources>
