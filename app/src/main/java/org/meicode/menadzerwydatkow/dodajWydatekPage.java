@@ -1,14 +1,18 @@
 package org.meicode.menadzerwydatkow;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,9 +42,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class dodajWydatekPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    //aparat
+    Button ZdjecieButton;
+    ImageView imageViewPicture;
+    private static final int REQUEST_CODE =22;
+    //
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -58,6 +69,19 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodaj_wydatek_page);
+
+        //aparat
+        ZdjecieButton   = findViewById(R.id.ZdjecieButton);
+        imageViewPicture= findViewById(R.id.imageViewPicture);
+
+        ZdjecieButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cameraIntnet = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntnet,REQUEST_CODE);
+            }
+        });
+        //
 
         nazwaWydatku    = findViewById(R.id.Nazwa_wydatku);
         kategoria       = findViewById(R.id.kategoria);
@@ -120,6 +144,19 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
 
 
     }
+
+    //aparat
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK)
+        {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imageViewPicture.setImageBitmap(photo);
+        }else {
+            Toast.makeText(this, "Wyowałanie aparatu nie powiodło się!",Toast.LENGTH_SHORT).show();
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }//koniec aparat
 
     @Override
     public void onBackPressed() {
