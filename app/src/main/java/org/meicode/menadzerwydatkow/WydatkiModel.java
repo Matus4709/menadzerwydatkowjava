@@ -1,12 +1,15 @@
 package org.meicode.menadzerwydatkow;
 
+import java.util.Date;
+
 public class WydatkiModel {
 
-    private String Nazwa, Kategoria, Data;
-    private long Kwota;
+    private String Nazwa, Kategoria, Kwota;
+    private Date Data;
+    //private long Kwota;
 
     private WydatkiModel() {}
-    private WydatkiModel(String Nazwa,String Kategoria, String Data, long Kwota) {
+    private WydatkiModel(String Nazwa, String Kategoria, Date Data, String Kwota) {
         this.Nazwa = Nazwa;
         this.Kategoria = Kategoria;
         this.Data = Data;
@@ -29,19 +32,19 @@ public class WydatkiModel {
         Kategoria = kategoria;
     }
 
-    public String getData() {
+    public Date getData() {
         return Data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         Data = data;
     }
 
-    public long getKwota() {
+    public String getKwota() {
         return Kwota;
     }
 
-    public void setKwota(long kwota) {
+    public void setKwota(String kwota) {
         Kwota = kwota;
     }
 

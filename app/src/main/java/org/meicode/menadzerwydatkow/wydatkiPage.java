@@ -71,8 +71,8 @@ public class wydatkiPage extends AppCompatActivity implements NavigationView.OnN
             protected void onBindViewHolder(@NonNull WydatkiViewHolder holder, int position, @NonNull WydatkiModel model) {
                 holder.list_name.setText(model.getNazwa());
                 holder.list_category.setText(model.getKategoria());
-                holder.list_date.setText(model.getData());
-                holder.list_price.setText(model.getKwota() +"");
+                holder.list_date.setText(model.getData()+"");
+                holder.list_price.setText(model.getKwota()+"");
             }
         };
 
