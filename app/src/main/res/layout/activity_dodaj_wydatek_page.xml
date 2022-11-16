@@ -37,13 +37,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_menu" />
 
+
         <Button
             android:id="@+id/DodajWydatekButton"
             android:layout_width="222dp"
             android:layout_height="56dp"
             android:layout_marginTop="50dp"
-            android:layout_marginBottom="208dp"
-            android:background="@color/teal_200"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/bg_button2"
             android:text="Dodaj wydatek"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,13 +54,16 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
+            android:id="@+id/imageViewPicture"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/DodajWydatekButton"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DodajWydatekButton"
-            android:id="@+id/imageViewPicture" />
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.966" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
