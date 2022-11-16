@@ -2,6 +2,7 @@
 <resources>
     <style name="Apptheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:statusBarColor">#00CCFF</item>
+
     </style>
 
 </resources>
