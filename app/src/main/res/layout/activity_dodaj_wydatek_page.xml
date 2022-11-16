@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".dodajWydatekPage"
+    tools:context=".dodajWydatekPage">
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -64,114 +64,82 @@
             app:layout_constraintTop_toTopOf="@+id/toolbar"
             app:layout_constraintVertical_bias="0.966" />
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/DodajWydatekButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <TextView
-            android:id="@+id/NazwaWydatku"
+        <Button
+            android:id="@+id/ZdjecieButton"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:text="Podaj nazwe wydatku"
-            android:textSize="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_button1"
+            android:text="Zrób zdjecie paragonu/faktury"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewPicture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Suma"
+            app:layout_constraintVertical_bias="0.263" />
 
         <EditText
             android:id="@+id/Nazwa_wydatku"
             android:layout_width="340dp"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_edittext"
             android:ems="10"
+            android:hint="Podaj nazwe"
             android:inputType="textPersonName"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            />
-
-        <TextView
-            android:id="@+id/KategoriaWydatku"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="Podaj kategorie"
-            android:textSize="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
-
-
-        <Spinner
-            android:id="@+id/kategoriaspinner"
-            android:layout_width="340dp"
-            android:layout_height="50dp"
-            android:background="@drawable/bg_spinner"
-            android:ems="10"
-            android:entries="@array/kategorie"
-            android:layout_marginBottom="-15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
-
-        <TextView
-            android:id="@+id/KwotaWydatku"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Podaj kwote"
-            android:textSize="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <EditText
             android:id="@+id/Suma"
             android:layout_width="340dp"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_edittext"
             android:ems="10"
+            android:hint="Podaj kwote:"
             android:inputType="number|numberDecimal"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kategoriaspinner" />
 
         <TextView
-            android:id="@+id/Zdjecie"
+            android:id="@+id/KategoriaWydatku"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Wyślij zdjęcie "
+            android:layout_marginTop="20dp"
+            android:padding="5dp"
+            android:text="Podaj kategorie"
             android:textSize="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Nazwa_wydatku" />
 
-        <Button
-            android:id="@+id/ZdjecieButton"
+        <Spinner
+            android:id="@+id/kategoriaspinner"
             android:layout_width="340dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/bg_button1"
-            android:text="Zrób zdjecie paragonu/faktury"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            android:background="@drawable/bg_spinner"
+            android:ems="10"
+            android:entries="@array/kategorie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/KategoriaWydatku" />
 
-    </LinearLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
