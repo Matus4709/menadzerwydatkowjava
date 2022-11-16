@@ -1,0 +1,24 @@
+Rozdział 3
+
+
+Aplikacja wymagała przygotowania narzędzi to rozpoczęcia programowania, rozpoczęliśmy od instalacji IDE Android Studio, 
+który umożliwa wygodne tworzenie layoutów każdej aktywności oraz kodowanie w różnych językach programowania. Na potrzeby projektowe wybraliśmy język JAVA, również jednym
+z ważniejszych narzędzi które wykorzystywujemy jest GitHub - hosting umożliwiający tworzenie zdalnego repozytorium oraz kontrolę wersji oprogramowania, dzięki temu możliwa 
+współprace z członkami projektu.
+
+com.google.firebase.auth.FirebaseAuth - biblioteka umożliwajaca połączenie z systemem FireBase Auth, odpowiada za cały system logowania oraz rejestrowania
+nowych użytkoników. Rozwijająć myśl tej biblioteki, pobieramy z formularzy id zmiennych(e-mail, hasło) oraz inicjalizujemy bazę danych. Strona logowania (pierwsza po uruchomieniu 
+aplikacji) wpierw sprawdza czy użytkownik jest zalogowany, jeżeli jest to przekierowuje go na stronę główna aplikacji, jeżli nie to zostaje na stronie do logowania, gdzie 
+po wpisaniu danych sprawdza je z danymi serwera i loguje się gdy są poprawne dane poprzez przcisk "zaloguj", jeżli dane sa nie poprawne odpowiada błędem. przycisk
+"Zarejestruj" - przekierowuje do aktywności w której zawarty jest formularz rejestracji, również podłączony pod FirebaseAuth, jeżeli rejestracja przebiegnie pomyślnie, przekierowuje
+do strony logowania i wyświetla komunikat o poprawnej rejestracji, jeżeli nie to wyświetla komunikat o niepoprawnej rejestracja. 
+
+Kontunując, jeżeli logowanie przejdzie pomyślnie zanim uzyskamy dostęp do strony głównej aplikacja poprosi nas o zweryfikowanie właściciela poprzez dane biometryczne(twarz),
+dzięki bibilotece "androidx.biometric:biometric:1.1.0" jest to mozliwe, gdy zweryfikujemy dane ukaże nam się przycisk "potwierdź" by przejść dalej jeżeli nie, aplikacja
+umożliwi nam jeszcze zweryfikowanie za pomocą odciska palca, w przeciwnym wypadku nie uzyskamy dostępu. 
+
+
+Rozdział 4
+
+
+
