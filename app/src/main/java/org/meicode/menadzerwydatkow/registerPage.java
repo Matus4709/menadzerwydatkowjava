@@ -85,7 +85,7 @@ public class registerPage extends AppCompatActivity {
                    @Override
                    public void onComplete(@NonNull Task<AuthResult> task) {
                        if (task.isSuccessful()) {
-                           Toast.makeText(registerPage.this, "User Created.", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(registerPage.this, "Utworzono użytkownika.", Toast.LENGTH_SHORT).show();
                            userID = fAuth.getCurrentUser().getUid();
                            DocumentReference documentReference = fStore.collection("users").document(userID);
                            Map<String,Object> user = new HashMap<>();
@@ -94,13 +94,13 @@ public class registerPage extends AppCompatActivity {
                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                @Override
                                public void onSuccess(Void unused) {
-                                   Log.d(TAG,"onSuccess: user Profile is created for "+ userID);
+                                   Log.d(TAG,"onSuccess: Konto zostało utworzone dla "+ userID);
                                }
                            });
                            startActivity(new Intent(getApplicationContext(),startPage.class));
 
                        }else {
-                           Toast.makeText(registerPage.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                           Toast.makeText(registerPage.this, "Błąd! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                        }
 
                    }
