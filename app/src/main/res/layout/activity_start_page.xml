@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startPage"
+    tools:context=".startPage">
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -23,52 +23,52 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        app:title="@string/start"
         android:background="@color/header"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_menu"/>
+        app:layout_constraintVertical_bias="0.0"
+        app:navigationIcon="@drawable/ic_menu"
+        app:title="@string/start" />
+
+    <TextView
+        android:id="@+id/textSaldo"
+        android:layout_width="261dp"
+        android:layout_height="42dp"
+        android:layout_weight="1"
+        android:text="SALDO: 2400$"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dodajWydatekBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <Button
+        android:id="@+id/dodajWydatekBtn"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_button2"
+        android:text="Dodaj Wydatek"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.264" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="342dp"
-        android:layout_height="63dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="98dp"
-        android:paddingTop="100dp">
-
-
-        <TextView
-            android:id="@+id/textSaldo"
-            android:layout_width="261dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="30dp"
-            android:layout_weight="1"
-            android:text="SALDO: 2400$"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/dodajWydatekBtn"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_button2"
-            android:text="Dodaj Wydatek"
-            android:layout_marginRight="50dp" />
-    </LinearLayout>
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

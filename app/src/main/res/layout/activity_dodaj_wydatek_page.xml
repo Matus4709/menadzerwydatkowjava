@@ -75,16 +75,16 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageViewPicture"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Suma"
-            app:layout_constraintVertical_bias="0.263" />
+            app:layout_constraintVertical_bias="0.56" />
 
         <EditText
             android:id="@+id/Nazwa_wydatku"
             android:layout_width="340dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/bg_edittext"
             android:ems="10"
             android:hint="Podaj nazwe"
@@ -100,7 +100,7 @@
             android:id="@+id/Suma"
             android:layout_width="340dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/bg_edittext"
             android:ems="10"
             android:hint="Podaj kwote:"
@@ -108,7 +108,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kategoriaspinner" />
 
@@ -116,12 +116,12 @@
             android:id="@+id/KategoriaWydatku"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:padding="5dp"
             android:text="Podaj kategorie"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Nazwa_wydatku" />
 
@@ -129,7 +129,7 @@
             android:id="@+id/kategoriaspinner"
             android:layout_width="340dp"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/bg_spinner"
             android:ems="10"
             android:entries="@array/kategorie"
