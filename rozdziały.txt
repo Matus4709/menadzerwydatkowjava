@@ -1,24 +1,65 @@
 Rozdział 3
 
 
-Aplikacja wymagała przygotowania narzędzi to rozpoczęcia programowania, rozpoczęliśmy od instalacji IDE Android Studio, 
+Aplikacja wymagała przygotowania narzędzi do rozpoczęcia programowania, rozpoczęliśmy od instalacji IDE Android Studio, 
 który umożliwa wygodne tworzenie layoutów każdej aktywności oraz kodowanie w różnych językach programowania. Na potrzeby projektowe wybraliśmy język JAVA, również jednym
-z ważniejszych narzędzi które wykorzystywujemy jest GitHub - hosting umożliwiający tworzenie zdalnego repozytorium oraz kontrolę wersji oprogramowania, dzięki temu możliwa 
-współprace z członkami projektu.
+z ważniejszych narzędzi które wykorzystywujemy jest GitHub - hosting umożliwiający tworzenie zdalnego repozytorium oraz kontrolę wersji oprogramowania, dzięki temu możliwa jest współpraca z członkami projektu. Wykorzystujemy także Firebase - zestaw usług hostingowych dla każdego typu aplikacji. Oferuje NoSQL i hosting w czasie rzeczywistym baz danych, treści, uwierzytelnianie społecznościowe i powiadomienia lub usługi, takie jak serwer komunikacji w czasie rzeczywistym. Jako bazę danych wykorzystujemy Firebase Firestore Database. Do rejestracji i logowania używamy Firebase Authentication.
+
 
 com.google.firebase.auth.FirebaseAuth - biblioteka umożliwajaca połączenie z systemem FireBase Auth, odpowiada za cały system logowania oraz rejestrowania
 nowych użytkoników. Rozwijająć myśl tej biblioteki, pobieramy z formularzy id zmiennych(e-mail, hasło) oraz inicjalizujemy bazę danych. Strona logowania (pierwsza po uruchomieniu 
 aplikacji) wpierw sprawdza czy użytkownik jest zalogowany, jeżeli jest to przekierowuje go na stronę główna aplikacji, jeżli nie to zostaje na stronie do logowania, gdzie 
 po wpisaniu danych sprawdza je z danymi serwera i loguje się gdy są poprawne dane poprzez przcisk "zaloguj", jeżli dane sa nie poprawne odpowiada błędem. przycisk
 "Zarejestruj" - przekierowuje do aktywności w której zawarty jest formularz rejestracji, również podłączony pod FirebaseAuth, jeżeli rejestracja przebiegnie pomyślnie, przekierowuje
-do strony logowania i wyświetla komunikat o poprawnej rejestracji, jeżeli nie to wyświetla komunikat o niepoprawnej rejestracja. 
+do strony logowania i wyświetla komunikat o poprawnej rejestracji, jeżeli nie to wyświetla komunikat o niepoprawnej rejestracji. 
 
-Kontunując, jeżeli logowanie przejdzie pomyślnie zanim uzyskamy dostęp do strony głównej aplikacja poprosi nas o zweryfikowanie właściciela poprzez dane biometryczne(twarz),
-dzięki bibilotece "androidx.biometric:biometric:1.1.0" jest to mozliwe, gdy zweryfikujemy dane ukaże nam się przycisk "potwierdź" by przejść dalej jeżeli nie, aplikacja
-umożliwi nam jeszcze zweryfikowanie za pomocą odciska palca, w przeciwnym wypadku nie uzyskamy dostępu. 
+Kontunując, jeżeli logowanie przejdzie pomyślnie zanim uzyskamy dostęp do strony głównej aplikacja poprosi nas o zweryfikowanie właściciela poprzez dane biometryczne,
+dzięki bibilotece "androidx.biometric:biometric:1.1.0".
 
+com.google.firebase.firestore.FirebaseFirestore - biblioteka umożliwiająca obsługę bazy danych znajdującej się w Firebase, odpowiada za system przechowywania, odczytu i zapisu danych poszczególnych użytkowników. Cloud Firestore jest elastyczną, skalowalną, hierarchiczną bazą danych NoSQL w chmurze służącą do przechowywania i synchronizowania w czasie rzeczywistym danych między klientami i serwerem. Wykorzystujemy ją jako system do zapisywania wydatków w bazie danych dla poszczególnych użytkowników oraz do wyświetlania ich.
+com.google.firebase.firestore.Query - biblioteka, którą wykorzystujemy do obsługi zapytań.
+FirebaseUI ułatwia powiązanie danych z Cloud Firestore z interfejsem aplikacji.
+com.google.firebase.firestore.DocumentReference - biblioteka daje nam możliwość odwoływania się do poszczególnych dokumentów w bazie danych.
+java.util.Calendar- biblioteka, którą wykorzystujemy do pobierania systemowego czasu oraz daty dodania wydaatku.
+
+
+android.provider.MediaStore - biblioteka odpowiadająca za tworzenie indeksowanej kolekcji zdjęć,wykorzystujemy ją do zapisywania zdjęć po ich zrobieniu.
+android.graphics.Bitmap - biblioteka, którą używamy do kompresji zdjęć do formatu bitmapy.
 
 Rozdział 4
+
+//Metoda Firebase Auth tworząca użytkownika za pomocą emaila i hasła.
+//Funckja onComplete sprawdza czy rejestarcja się powiodła.
+//Jeśli tak, z Firebase Auth pobrane zostaje ID użytkownika i zapisane jako zmienna String.
+//Następnie zostaje utworzona Hashmapa do której zapisane zostają login oraz email pobrany z formularza rejestarcji.
+//Hashmapa zostaje dodana do bazy danych do kolekcji "users" w dokumencie o id poszczególnego użytkownika. 
+//Następnie przenosi do strony głównej aplikacji.
+
+
+   fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {  
+                   @Override
+                   public void onComplete(@NonNull Task<AuthResult> task) {
+                       if (task.isSuccessful()) {
+                           Toast.makeText(registerPage.this, "Utworzono użytkownika.", Toast.LENGTH_SHORT).show();
+                           userID = fAuth.getCurrentUser().getUid();
+                           DocumentReference documentReference = fStore.collection("users").document(userID);
+                           Map<String,Object> user = new HashMap<>();
+                           user.put("login",login);
+                           user.put("email",email);
+                           documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                               @Override
+                               public void onSuccess(Void unused) {
+                                   Log.d(TAG,"onSuccess: Konto zostało utworzone dla "+ userID);
+                               }
+                           });
+                           startActivity(new Intent(getApplicationContext(),startPage.class));
+
+                       }else {
+                           Toast.makeText(registerPage.this, "Błąd! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                       }
+
+                   }
+               });
 
 
 
