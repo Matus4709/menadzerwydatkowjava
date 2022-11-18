@@ -53,7 +53,8 @@ public class wydatkiPage extends AppCompatActivity implements NavigationView.OnN
 
         userID  = fAuth.getCurrentUser().getUid();
         //Query
-        Query query = firebaseFirestore.collection("users").document(userID).collection("wydatki");
+        Query query = firebaseFirestore.collection("users").document(userID).collection("wydatki")
+                .orderBy("Data", Query.Direction.DESCENDING);
         //RecyclerOptions
         FirestoreRecyclerOptions<WydatkiModel> options = new FirestoreRecyclerOptions.Builder<WydatkiModel>()
                 .setQuery(query,WydatkiModel.class)
