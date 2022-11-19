@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class wydatkiPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class wydatkiPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FirestoreAdapter.OnListItemClick {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -36,7 +37,7 @@ public class wydatkiPage extends AppCompatActivity implements NavigationView.OnN
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth fAuth;
     private RecyclerView mwydatkiList;
-    private FirestoreRecyclerAdapter adapter;
+    private FirestoreAdapter adapter;
     private String userID;
 
 
@@ -57,25 +58,11 @@ public class wydatkiPage extends AppCompatActivity implements NavigationView.OnN
                 .orderBy("Data", Query.Direction.DESCENDING);
         //RecyclerOptions
         FirestoreRecyclerOptions<WydatkiModel> options = new FirestoreRecyclerOptions.Builder<WydatkiModel>()
+                .setLifecycleOwner(this)
                 .setQuery(query,WydatkiModel.class)
                 .build();
 
-         adapter = new FirestoreRecyclerAdapter<WydatkiModel, WydatkiViewHolder>(options) {
-            @NonNull
-            @Override
-            public WydatkiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_single, parent,false);
-                return new WydatkiViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(@NonNull WydatkiViewHolder holder, int position, @NonNull WydatkiModel model) {
-                holder.list_name.setText(model.getNazwa());
-                holder.list_category.setText(model.getKategoria());
-                holder.list_date.setText(model.getData()+"");
-                holder.list_price.setText(model.getKwota()+"");
-            }
-        };
+         adapter = new FirestoreAdapter(options, this);
 
          mwydatkiList.setHasFixedSize(true);
          mwydatkiList.setLayoutManager(new LinearLayoutManager(this));
@@ -162,34 +149,8 @@ public class wydatkiPage extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
-    private class WydatkiViewHolder extends RecyclerView.ViewHolder{
-
-        private TextView list_name;
-        private TextView list_category;
-        private TextView list_date;
-        private TextView list_price;
-
-        public WydatkiViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            list_name = itemView.findViewById(R.id.list_name);
-            list_category = itemView.findViewById(R.id.list_category);
-            list_date = itemView.findViewById(R.id.list_date);
-            list_price = itemView.findViewById(R.id.list_price);
-
-        }
-
-    }
-
     @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
+    public void onItemClick() {
+        Log.d("ITEM CLICK","Clicked an item");
     }
 }
