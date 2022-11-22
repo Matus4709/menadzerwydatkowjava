@@ -5,11 +5,12 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startPage">
+    tools:context=".startPage"><![CDATA[
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
 
+    ]]>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
@@ -67,6 +68,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.264" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Ostatnie 5 wydatków: "
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dodajWydatekBtn" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/wydatkiList5"
+        android:layout_width="326dp"
+        android:layout_height="343dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

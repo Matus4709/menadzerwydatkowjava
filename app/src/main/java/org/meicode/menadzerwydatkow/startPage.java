@@ -6,9 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,19 +20,50 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
-public class startPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class startPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FirestoreAdapter.OnListItemClick {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+
+    private FirebaseFirestore firebaseFirestore;
+    private FirebaseAuth fAuth;
+    private RecyclerView mwydatkiList;
+    private FirestoreAdapter adapter;
+    private String userID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_page);
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        fAuth = FirebaseAuth.getInstance();
+        mwydatkiList = findViewById(R.id.wydatkiList5);
+
+        userID  = fAuth.getCurrentUser().getUid();
+        //Query
+        Query query = firebaseFirestore.collection("users").document(userID).collection("wydatki")
+                .orderBy("Data", Query.Direction.DESCENDING).limit(5);
+        //RecyclerOptions
+        FirestoreRecyclerOptions<WydatkiModel> options = new FirestoreRecyclerOptions.Builder<WydatkiModel>()
+                .setLifecycleOwner(this)
+                .setQuery(query,WydatkiModel.class)
+                .build();
+
+        adapter = new FirestoreAdapter(options,this);
+
+        mwydatkiList.setHasFixedSize(true);
+        mwydatkiList.setLayoutManager(new LinearLayoutManager(this));
+        mwydatkiList.setAdapter(adapter);
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -100,5 +135,10 @@ public class startPage extends AppCompatActivity implements NavigationView.OnNav
         drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    @Override
+    public void onItemClick() {
+        Log.d("ITEM CLICK","Clicked an item");
     }
 }

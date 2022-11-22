@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import java.text.SimpleDateFormat;
+
 public class FirestoreAdapter  extends FirestoreRecyclerAdapter<WydatkiModel, FirestoreAdapter.WydatkiViewHolder> {
 
     private OnListItemClick onListItemClick;
@@ -25,7 +27,9 @@ public class FirestoreAdapter  extends FirestoreRecyclerAdapter<WydatkiModel, Fi
     protected void onBindViewHolder(@NonNull WydatkiViewHolder holder, int position, @NonNull WydatkiModel model) {
         holder.list_name.setText(model.getNazwa());
         holder.list_category.setText(model.getKategoria());
-        holder.list_date.setText(model.getData()+"");
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+        String stringDate= DateFor.format(model.getData());
+        holder.list_date.setText(stringDate+"");
         holder.list_price.setText(model.getKwota()+"");
     }
 
