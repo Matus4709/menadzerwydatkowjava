@@ -16,18 +16,16 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class startPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FirestoreAdapter.OnListItemClick {
+public class startPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FirestoreAdapter.OnItemClickListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -137,8 +135,9 @@ public class startPage extends AppCompatActivity implements NavigationView.OnNav
         return true;
     }
 
+
     @Override
-    public void onItemClick() {
-        Log.d("ITEM CLICK","Clicked an item");
+    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+
     }
 }

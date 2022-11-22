@@ -10,17 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.text.SimpleDateFormat;
 
 public class FirestoreAdapter  extends FirestoreRecyclerAdapter<WydatkiModel, FirestoreAdapter.WydatkiViewHolder> {
 
-    private OnListItemClick onListItemClick;
+    private OnItemClickListener listener;
 
 
-    public FirestoreAdapter(@NonNull FirestoreRecyclerOptions<WydatkiModel> options, OnListItemClick onListItemClick) {
+    public FirestoreAdapter(@NonNull FirestoreRecyclerOptions<WydatkiModel> options, OnItemClickListener onItemClickListener) {
         super(options);
-        this.onListItemClick = onListItemClick;
+
     }
 
     @Override
@@ -64,12 +65,17 @@ public class FirestoreAdapter  extends FirestoreRecyclerAdapter<WydatkiModel, Fi
 
         @Override
         public void onClick(View view) {
-            onListItemClick.onItemClick();
+            int position = getAdapterPosition();
+            if(position !=RecyclerView.NO_POSITION && listener!= null){
+                listener.onItemClick(getSnapshots().getSnapshot(position),position);
+            }
         }
     }
 
-    public interface OnListItemClick {
-        void onItemClick();
+    public interface OnItemClickListener {
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
-
+        public void setOnItemClickListener(OnItemClickListener listener){
+            this.listener = listener;
+        }
 }
