@@ -41,7 +41,7 @@ public class WydatkiModel {
     }
 
     public String getKwota() {
-        return Kwota;
+        return Kwota +" PLN";
     }
 
     public void setKwota(String kwota) {
