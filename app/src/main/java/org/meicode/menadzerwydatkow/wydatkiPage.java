@@ -82,7 +82,9 @@ public class wydatkiPage extends AppCompatActivity implements NavigationView.OnN
                 String id = documentSnapshot.getId();
                 String path = documentSnapshot.getReference().getPath();
                 Log.d("CLICK","Clicked on: " + id +" nr: " + position );
-                
+                Intent i = new Intent(wydatkiPage.this, podgladWydatkuPage.class);
+                i.putExtra("key",id);
+                startActivity(i);
             }
         });
 
