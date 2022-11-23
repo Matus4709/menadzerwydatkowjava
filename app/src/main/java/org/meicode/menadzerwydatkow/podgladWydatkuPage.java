@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -78,7 +81,22 @@ public class podgladWydatkuPage extends AppCompatActivity {
 
 
 
-
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent back = new Intent(podgladWydatkuPage.this, wydatkiPage.class);
+                startActivity(back);
+            }
+        });
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fStore.collection("users").document(userID).collection("wydatki").document(wID).delete();
+                Intent del = new Intent(podgladWydatkuPage.this, wydatkiPage.class);
+                startActivity(del);
+                Toast.makeText(podgladWydatkuPage.this, "Usunięto wydatek!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
