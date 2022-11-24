@@ -13,6 +13,7 @@
             android:icon="@drawable/ic_wydatki"
             android:title="Wydatki" />
 
+
         <item
             android:id="@+id/nav_statystyki"
             android:icon="@drawable/ic_statystyki"
@@ -22,6 +23,7 @@
             android:id="@+id/nav_ustawienia"
             android:icon="@drawable/ic_ustawienia"
             android:title="Ustawienia" />
+
 
 
     </group>
