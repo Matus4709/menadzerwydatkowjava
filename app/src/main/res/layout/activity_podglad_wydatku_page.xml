@@ -8,137 +8,149 @@
     tools:context=".podgladWydatkuPage">
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/nav_view"
+        android:layout_gravity="start"
         app:headerLayout="@layout/header"
-        app:menu="@menu/main_menu"
-        android:layout_gravity="start">
+        app:menu="@menu/main_menu">
 
     </com.google.android.material.navigation.NavigationView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        app:title="Podgląd wydatków"
-        android:background="@color/header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_menu"/>
 
-    <Button
-        android:id="@+id/deleteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/bg_button3"
-        android:text="Usuń wydatek"
-        app:layout_constraintBottom_toTopOf="@+id/cancelBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.978" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/header"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_menu"
+            app:title="Podgląd wydatków" />
 
-    <Button
-        android:id="@+id/cancelBtn"
-        android:layout_width="97dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="192dp"
-        android:background="@drawable/bg_button2"
-        android:text="Wstecz"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="97dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/bg_button2"
+            android:text="Wstecz"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/DataTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="96dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/KwotaTV" />
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_button3"
+            android:text="Usuń wydatek"
+            app:layout_constraintBottom_toTopOf="@+id/cancelBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:text="Nazwa:"
-        app:layout_constraintEnd_toStartOf="@+id/NazwaTV"
-        app:layout_constraintHorizontal_bias="0.462"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="312dp"
+            android:layout_height="287dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/deleteBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
-        android:text="Kwota:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            <LinearLayout
+                android:layout_width="116dp"
+                android:layout_height="675dp"
+                android:orientation="vertical"
+                android:textAlignment="textEnd">
 
-    <TextView
-        android:id="@+id/KategoriaTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="96dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NazwaTV" />
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="Nazwa:"
+                    android:textAlignment="viewEnd"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/KwotaTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/KategoriaTV" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="Kategoria:"
+                    android:textAlignment="viewEnd"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Data:"
-        app:layout_constraintEnd_toStartOf="@+id/DataTV"
-        app:layout_constraintHorizontal_bias="0.442"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="Data:"
+                    android:textAlignment="viewEnd"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Kategoria:"
-        app:layout_constraintEnd_toStartOf="@+id/KategoriaTV"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="Kwota:"
+                    android:textAlignment="viewEnd"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/NazwaTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="96dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="224dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/NazwaTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/KategoriaTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/DataTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/KwotaTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="TextView" />
+            </LinearLayout>
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

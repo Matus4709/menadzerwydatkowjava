@@ -77,12 +77,13 @@ public class podgladWydatkuPage extends AppCompatActivity implements NavigationV
         docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                nazwa.setText(value.getString("Nazwa"));
+                String Nazwa1stUpper = (value.getString("Nazwa")).substring(0, 1).toUpperCase() + (value.getString("Nazwa")).substring(1);
+                nazwa.setText(Nazwa1stUpper);
                 kategoria.setText(value.getString("Kategoria"));
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
                 String string  = dateFormat.format(value.getDate("Data"));
                 data.setText(string);
-                kwota.setText(value.getString("Kwota"));
+                kwota.setText(value.getString("Kwota")+" PLN");
             }
         });
 
