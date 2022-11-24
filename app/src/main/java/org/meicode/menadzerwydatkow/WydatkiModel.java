@@ -17,7 +17,8 @@ public class WydatkiModel {
     }
 
     public String getNazwa() {
-        return Nazwa;
+        String Nazwa1stUpper = Nazwa.substring(0, 1).toUpperCase() + Nazwa.substring(1);
+        return Nazwa1stUpper;
     }
 
     public void setNazwa(String nazwa) {
