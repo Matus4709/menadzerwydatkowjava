@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -20,7 +21,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Calendar;
@@ -56,6 +61,8 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
     String userID;
     FirebaseAuth fAuth;
 
+
+
     Spinner languageSpinner;
     // on below line we are creating a variable for our list of data to be displayed in spinner.
     String[] languages = {"Spożywcze","Podatki","Chemia"};
@@ -64,6 +71,9 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodaj_wydatek_page);
+
+
+
 
         //aparat
         ZdjecieButton   = findViewById(R.id.ZdjecieButton);
@@ -89,6 +99,8 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
 
         fStore = FirebaseFirestore.getInstance();
         fAuth  = FirebaseAuth.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -121,6 +133,29 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                 wydatek.put("Kategoria", category);
                 wydatek.put("Kwota",suma);
                 wydatek.put("Data",data);
+
+                //dodawanie zdjecia z imageview do bazy danych
+                imageViewPicture.setDrawingCacheEnabled(true);
+                imageViewPicture.buildDrawingCache();
+                Bitmap bitmap = ((BitmapDrawable) imageViewPicture.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] sdata = baos.toByteArray();
+
+                UploadTask uploadTask = storageRef.child("users/" + userID + "/wydatki/" + data).putBytes(sdata);
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Log.d("PHOTOX","Nie udalo sie przeslac zdjecia");
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Log.d("PHOTOX","Udało sie przesłać zdjęcie");
+                    }
+                });
+
+
 
                 docReference.set(wydatek).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
