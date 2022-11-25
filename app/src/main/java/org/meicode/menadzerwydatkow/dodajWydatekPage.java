@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -15,8 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -126,6 +131,7 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                 String category = textSpinner.toString();
                 String suma = kwota.getText().toString();
                 Date data = currentTime;
+                String urlAdres;
                 userID = fAuth.getCurrentUser().getUid();
                 DocumentReference docReference = fStore.collection("users").document(userID).collection("wydatki").document();
                 Map<String, Object> wydatek = new HashMap<>();
@@ -154,6 +160,32 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                         Log.d("PHOTOX","Udało sie przesłać zdjęcie");
                     }
                 });
+                final StorageReference ref = storageRef.child("users/" + userID + "/wydatki/" + data);
+                uploadTask = ref.putBytes(sdata);
+
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+
+                        // Continue with the task to get the download URL
+                        return ref.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                        } else {
+                            // Handle failures
+                            // ...
+                        }
+                    }
+                });
+                urlAdres = String.valueOf(ref.getDownloadUrl());
+                wydatek.put("URL",urlAdres);
 
 
 
