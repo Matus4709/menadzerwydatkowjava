@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="header">#62d44d</color>
     <color name="statusBarColor">#00CCFF</color>
+
+    <color name="textColor">#000000</color>
+    <color name="backgroundColor">#ffffff</color>
+
+
+
 </resources>

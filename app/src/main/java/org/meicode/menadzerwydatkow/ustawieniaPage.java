@@ -3,6 +3,7 @@ package org.meicode.menadzerwydatkow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
@@ -26,11 +28,37 @@ public class ustawieniaPage extends AppCompatActivity implements NavigationView.
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    Button btnlightdark;
+    Boolean isDarkModeOn=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ustawienia_page);
+        btnlightdark = findViewById(R.id.btndarklight);
+
+        isDarkModeOn = getDarkModeStatus();
+        if(isDarkModeOn){
+            btnlightdark.setText("On Light Mode");
+        }else {
+            btnlightdark.setText("On Dark Mode");
+        }
+
+        btnlightdark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isDarkModeOn){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    btnlightdark.setText("On Dark Mode");
+                    isDarkModeOn=false;
+                }else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    btnlightdark.setText("On Light Mode");
+                    isDarkModeOn=true;
+                }
+            }
+        });
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -50,6 +78,19 @@ public class ustawieniaPage extends AppCompatActivity implements NavigationView.
 
     }
 
+    private boolean getDarkModeStatus(){
+        int nightModeFlags =
+                ustawieniaPage.this.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags){
+            case Configuration.UI_MODE_NIGHT_YES:
+                return true;
+            case Configuration.UI_MODE_NIGHT_NO:
+                return false;
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                return false;
+        }
+        return false;
+    }
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
