@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     tools:context=".startPage"><![CDATA[
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -46,9 +47,9 @@
         android:layout_width="261dp"
         android:layout_height="42dp"
         android:layout_weight="1"
-        android:text="SALDO: 2400$"
+        android:text="SALDO: 2400 PLN"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/header"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/dodajWydatekBtn"
