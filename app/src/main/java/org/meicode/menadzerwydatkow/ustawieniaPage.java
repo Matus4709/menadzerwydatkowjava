@@ -10,8 +10,12 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -22,19 +26,34 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ustawieniaPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    Button btnlightdark;
+    Button btnlightdark,maxKwotaBtn,przychodyBtn;
     Boolean isDarkModeOn=false;
+    EditText maxKwotaET,przychodyET;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ustawienia_page);
+
+
+        maxKwotaET = findViewById(R.id.maxKwotaET);
+        maxKwotaBtn = findViewById(R.id.maxKwotaBtn);
+        przychodyET = findViewById(R.id.przychodyET);
+        przychodyBtn = findViewById(R.id.ptzychodyBtn);
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
         btnlightdark = findViewById(R.id.btndarklight);
 
@@ -76,6 +95,49 @@ public class ustawieniaPage extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView.setCheckedItem(R.id.nav_ustawienia);
+
+        //max kwota
+        maxKwotaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String value= maxKwotaET.getText().toString();
+                int maxKwota=Integer.parseInt(value);
+                userID=fAuth.getCurrentUser().getUid();
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("ustawienia").document("limit");
+                Map<String,Object> kwota = new HashMap<>();
+                kwota.put("maxKwota",maxKwota);
+                documentReference.set(kwota).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(ustawieniaPage.this, "Zapisano zmiany.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),ustawieniaPage.class));
+                    }
+                });
+
+            }
+        });
+
+        //przychody
+        przychodyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String value = przychodyET.getText().toString();
+                int przychody = Integer.parseInt(value);
+                userID = fAuth.getCurrentUser().getUid();
+                DocumentReference documentReference = fStore.collection("users").document(userID).collection("ustawienia").document("incomes");
+                Map<String,Object> kwota = new HashMap<>();
+                kwota.put("przychody",przychody);
+                documentReference.set(kwota).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(ustawieniaPage.this, "Zapisano zmiany.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),ustawieniaPage.class));
+                    }
+                });
+            }
+        });
+
+
 
     }
 

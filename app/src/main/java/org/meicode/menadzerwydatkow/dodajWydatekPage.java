@@ -174,10 +174,7 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Log.d("PHOTOX","Udało sie przesłać zdjęcie");
-                        if (getLimit()==1)
-                        {
-                            sendOnChannel1();
-                        }
+
                     }
                 });
                 final StorageReference ref = storageRef.child("users/" + userID + "/wydatki/" + data);
@@ -213,6 +210,12 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d(TAG, "Wydatek zapisany!");
+
+                        if (getLimit()==1)
+                        {
+                            sendOnChannel1();
+                        }
+
                         startActivity(new Intent(getApplicationContext(),startPage.class));
 
                     }
