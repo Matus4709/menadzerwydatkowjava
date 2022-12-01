@@ -18,7 +18,9 @@
         android:id="@+id/nav_view"
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:background="@color/backgroundColor"
+        app:itemTextColor="@color/textColor">
 
     </com.google.android.material.navigation.NavigationView>
 
@@ -45,7 +47,7 @@
             android:layout_height="56dp"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="50dp"
-            android:background="@color/header"
+            android:background="@drawable/bg_button2"
             android:textColor="@color/textColor"
             android:text="Dodaj wydatek"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -87,10 +89,10 @@
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="60dp"
-            android:background="@color/header"
-            android:backgroundTint="@color/textColor"
+            android:background="@drawable/bg_edittext"
             android:ems="10"
             android:hint="Podaj nazwe"
+            android:textColorHint="@color/textColor"
             android:inputType="textPersonName"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
@@ -101,13 +103,14 @@
 
         <EditText
             android:id="@+id/Suma"
-            android:background="@color/header"
-            android:backgroundTint="@color/textColor"
+            android:background="@drawable/bg_edittext"
+
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
             android:ems="10"
             android:hint="Podaj kwote:"
+            android:textColorHint="@color/textColor"
             android:inputType="number|numberDecimal"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"

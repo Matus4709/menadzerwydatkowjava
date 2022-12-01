@@ -17,7 +17,9 @@
         android:id="@+id/nav_view"
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:background="@color/backgroundColor"
+        app:itemTextColor="@color/textColor">
 
     </com.google.android.material.navigation.NavigationView>
 
@@ -44,10 +46,10 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="28dp"
-            android:backgroundTint="@color/btnColorBackground"
+            android:background="@drawable/bg_button2"
             android:onClick="logout"
             android:text="Wyloguj"
-            android:textColor="@color/white"
+            android:textColor="@color/textColor"
             android:textSize="16sp"
             android:textStyle="bold"
             app:icon="@drawable/logout_icon_151219__1_"
@@ -64,7 +66,7 @@
             android:layout_width="152dp"
             android:layout_height="47dp"
             android:layout_marginTop="76dp"
-            android:background="@color/header"
+            android:background="@drawable/bg_button2"
             android:textColor="@color/textColor"
             android:paddingLeft="30dp"
             android:paddingTop="5dp"
@@ -89,6 +91,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:textColor="@color/textColor"
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,6 +103,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btndarklight" />
 
         <EditText
+            android:textColor="@color/textColor"
             android:id="@+id/maxKwotaET"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -124,6 +128,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
+            android:textColor="@color/textColor"
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,6 +140,7 @@
             app:layout_constraintTop_toBottomOf="@+id/maxKwotaET" />
 
         <EditText
+            android:textColor="@color/textColor"
             android:id="@+id/przychodyET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

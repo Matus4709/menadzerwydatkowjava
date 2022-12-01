@@ -19,7 +19,9 @@
         android:id="@+id/nav_view"
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:background="@color/backgroundColor"
+        app:itemTextColor="@color/textColor">
 
     </com.google.android.material.navigation.NavigationView>
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +51,7 @@
         android:layout_weight="1"
         android:text="SALDO: 2400 PLN"
         android:textAlignment="center"
-        android:textColor="@color/header"
+        android:textColor="@color/textColor"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/dodajWydatekBtn"
@@ -62,7 +64,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_weight="1"
-        android:background="@color/header"
+        android:background="@drawable/bg_button2"
         android:text="Dodaj Wydatek"
         android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:text="Ostatnie wydatki: "
-        android:textColor="@color/header"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

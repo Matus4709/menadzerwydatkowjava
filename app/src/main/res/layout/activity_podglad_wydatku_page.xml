@@ -14,7 +14,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/header"
-        app:menu="@menu/main_menu">
+        app:menu="@menu/main_menu"
+        android:background="@color/backgroundColor"
+        app:itemTextColor="@color/textColor">
 
     </com.google.android.material.navigation.NavigationView>
 
@@ -49,7 +51,7 @@
             android:layout_width="97dp"
             android:layout_height="52dp"
             android:layout_marginBottom="32dp"
-            android:background="@color/header"
+            android:background="@drawable/bg_button2"
             android:textColor="@color/textColor"
             android:text="Wstecz"
             app:layout_constraintBottom_toBottomOf="parent"
