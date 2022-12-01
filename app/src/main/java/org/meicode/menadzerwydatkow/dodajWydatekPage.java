@@ -77,6 +77,7 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
     FirebaseFirestore fStore;
     String userID;
     FirebaseAuth fAuth;
+    boolean zdjecietf;
 
 
 
@@ -96,12 +97,15 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
         //aparat
         ZdjecieButton   = findViewById(R.id.ZdjecieButton);
         imageViewPicture= findViewById(R.id.imageViewPicture);
+        zdjecietf = false;
+
 
         ZdjecieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent cameraIntnet = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntnet,REQUEST_CODE);
+                zdjecietf=true;
             }
         });
         //
@@ -156,53 +160,57 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                 wydatek.put("Kwota",suma);
                 wydatek.put("Data",data);
 
-                //dodawanie zdjecia z imageview do bazy danych
-                imageViewPicture.setDrawingCacheEnabled(true);
-                imageViewPicture.buildDrawingCache();
-                Bitmap bitmap = ((BitmapDrawable) imageViewPicture.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] sdata = baos.toByteArray();
+                if(zdjecietf){
+                    //dodawanie zdjecia z imageview do bazy danych
+                    imageViewPicture.setDrawingCacheEnabled(true);
+                    imageViewPicture.buildDrawingCache();
+                    Bitmap bitmap = ((BitmapDrawable) imageViewPicture.getDrawable()).getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] sdata = baos.toByteArray();
 
-                UploadTask uploadTask = storageRef.child("users/" + userID + "/wydatki/" + data).putBytes(sdata);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Log.d("PHOTOX","Nie udalo sie przeslac zdjecia");
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.d("PHOTOX","Udało sie przesłać zdjęcie");
 
-                    }
-                });
-                final StorageReference ref = storageRef.child("users/" + userID + "/wydatki/" + data);
-                uploadTask = ref.putBytes(sdata);
-
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
+                    UploadTask uploadTask = storageRef.child("users/" + userID + "/wydatki/" + data).putBytes(sdata);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Log.d("PHOTOX","Nie udalo sie przeslac zdjecia");
                         }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Log.d("PHOTOX","Udało sie przesłać zdjęcie");
 
-                        // Continue with the task to get the download URL
-                        return ref.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
-                        } else {
-                            // Handle failures
-                            // ...
                         }
-                    }
-                });
-                urlAdres = String.valueOf(ref.getDownloadUrl());
-                wydatek.put("URL",urlAdres);
+                    });
+                    final StorageReference ref = storageRef.child("users/" + userID + "/wydatki/" + data);
+                    uploadTask = ref.putBytes(sdata);
+
+                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+
+                            // Continue with the task to get the download URL
+                            return ref.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                Uri downloadUri = task.getResult();
+                            } else {
+                                // Handle failures
+                                // ...
+                            }
+                        }
+                    });
+                    urlAdres = String.valueOf(ref.getDownloadUrl());
+                    wydatek.put("URL",urlAdres);
+
+                }
 
 
 
