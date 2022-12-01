@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/backgroundColor"
     tools:context=".dodajWydatekPage">
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
         <androidx.appcompat.widget.Toolbar
+            app:titleTextColor="@color/textColor"
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,7 +45,8 @@
             android:layout_height="56dp"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="50dp"
-            android:background="@drawable/bg_button2"
+            android:background="@color/header"
+            android:textColor="@color/textColor"
             android:text="Dodaj wydatek"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +73,7 @@
             android:layout_marginBottom="12dp"
             android:background="@drawable/bg_button1"
             android:text="Zrób zdjecie paragonu/faktury"
-            android:textColor="@color/white"
+            android:textColor="@color/textColor"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageViewPicture"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +87,8 @@
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="60dp"
-            android:background="@drawable/bg_edittext"
+            android:background="@color/header"
+            android:backgroundTint="@color/textColor"
             android:ems="10"
             android:hint="Podaj nazwe"
             android:inputType="textPersonName"
@@ -98,10 +101,11 @@
 
         <EditText
             android:id="@+id/Suma"
+            android:background="@color/header"
+            android:backgroundTint="@color/textColor"
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
-            android:background="@drawable/bg_edittext"
             android:ems="10"
             android:hint="Podaj kwote:"
             android:inputType="number|numberDecimal"
@@ -120,6 +124,7 @@
             android:padding="5dp"
             android:text="Podaj kategorie"
             android:textSize="20dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,6 +132,7 @@
 
         <Spinner
             android:id="@+id/kategoriaspinner"
+            android:popupBackground="@color/header"
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="4dp"
@@ -137,8 +143,6 @@
             app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/KategoriaWydatku" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

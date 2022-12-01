@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registerPage">
+    tools:context=".registerPage"
+    android:background="@color/backgroundColor">
 
     <LinearLayout
         android:layout_width="272dp"
@@ -14,9 +15,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <TextView
+            android:textColor="@color/textColor"
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,6 +29,8 @@
             android:textSize="20sp" />
 
         <EditText
+            android:textColorHint="@color/textColor"
+            android:backgroundTint="@color/textColor"
             android:id="@+id/regMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,6 +41,8 @@
             android:textAlignment="center" />
 
         <EditText
+            android:textColorHint="@color/textColor"
+            android:backgroundTint="@color/textColor"
             android:id="@+id/regLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,6 +52,8 @@
             android:textAlignment="center" />
 
         <EditText
+            android:textColorHint="@color/textColor"
+            android:backgroundTint="@color/textColor"
             android:id="@+id/regPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,6 +63,8 @@
             android:textAlignment="center" />
 
         <EditText
+            android:textColorHint="@color/textColor"
+            android:backgroundTint="@color/textColor"
             android:id="@+id/regCoPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,6 +74,8 @@
             android:textAlignment="center" />
 
         <Button
+            android:background="@color/header"
+            android:textColor="@color/textColor"
             android:id="@+id/regBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,7 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            tools:visibility="invisible" />
+            tools:visibility="invisible"
+            />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

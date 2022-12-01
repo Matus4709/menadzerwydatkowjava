@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     tools:context=".fpPage">
 
     <TextView
@@ -11,8 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Odblokuj aplikacje!"
-        android:textColor="@color/purple_700"
+        android:textColor="@color/textColor"
         android:textSize="25dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,6 +23,7 @@
         app:layout_constraintVertical_bias="0.381" />
 
     <ImageView
+        android:tint="@color/textColor"
         android:id="@+id/imageView"
         android:layout_width="128dp"
         android:layout_height="112dp"
