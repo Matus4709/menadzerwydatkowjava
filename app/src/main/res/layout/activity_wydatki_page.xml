@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".wydatkiPage"
     android:fitsSystemWindows="true"
+    android:background="@color/backgroundColor"
     tools:openDrawer="start">
 
 
@@ -16,6 +17,7 @@
         android:id="@+id/nav_view"
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"
+
         android:layout_gravity="start">
 
     </com.google.android.material.navigation.NavigationView>
@@ -28,11 +30,13 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             app:title="@string/wydatki"
+            app:titleTextColor="@color/textColor"
             android:background="@color/header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_menu"/>
+            app:navigationIcon="@drawable/ic_menu"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/wydatkiList"

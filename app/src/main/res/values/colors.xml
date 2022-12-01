@@ -12,7 +12,7 @@
 
     <color name="textColor">#000000</color>
     <color name="backgroundColor">#ffffff</color>
-
+    <color name="btnColorBackground">#2E3C63</color>
 
 
 </resources>

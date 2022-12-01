@@ -31,25 +31,10 @@ public class ustawieniaPage extends AppCompatActivity implements NavigationView.
     Button btnlightdark;
     Boolean isDarkModeOn=false;
 
-    double limit = 1;
-
-
-    private NotificationManagerCompat notificationManager;
-    private String editTextTitle;
-    private String editTextMessage;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ustawienia_page);
-
-        notificationManager = NotificationManagerCompat.from(this);
-        if (getLimit()==1)
-        {
-            sendOnChannel1();
-        }
-
 
         btnlightdark = findViewById(R.id.btndarklight);
 
@@ -92,36 +77,6 @@ public class ustawieniaPage extends AppCompatActivity implements NavigationView.
 
         navigationView.setCheckedItem(R.id.nav_ustawienia);
 
-    }
-
-    public double getLimit() {
-        return limit;
-    }
-    public void sendOnChannel1()
-    {
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            Notification notification = new Notification.Builder(this, CHANNEL_1_ID)
-                    .setSmallIcon(R.drawable.ic_baseline_attach_money_24)
-                    .setContentTitle("Menadżer Wydatków")
-                    .setContentText("Przekroczyłeś limit wydatków!")
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                    .build();
-            notificationManager.notify(1,notification);
-        }
-    }
-    public void sendOnChannel2(View v)
-    {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            Notification notification = new Notification.Builder(this, CHANNEL_2_ID)
-                    .setSmallIcon(R.drawable.ic_baseline_attach_money_24)
-                    .setContentTitle("Menadżer Wydatków")
-                    .setContentText("Przekroczyłeś limit wydatków! 2")
-                    .setPriority(Notification.PRIORITY_LOW)
-                    .build();
-            notificationManager.notify(2,notification);
-        }
     }
 
     private boolean getDarkModeStatus(){

@@ -2,7 +2,10 @@
 <resources>
 
 
-    <color name="textColor">#ffffff</color>
-    <color name="backgroundColor">#303030</color>
+    <color name="textColor">#D1D1D1</color>
+    <color name="backgroundColor">#111111</color>
+    <color name="btnColorBackground">#2E3C63</color>
+    <color name="header">#3D3D3D</color>
+
 
 </resources>

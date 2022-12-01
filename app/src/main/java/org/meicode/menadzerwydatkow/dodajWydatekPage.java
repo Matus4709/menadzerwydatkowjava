@@ -1,9 +1,12 @@
 package org.meicode.menadzerwydatkow;
 
+import static org.meicode.menadzerwydatkow.App.CHANNEL_1_ID;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -37,6 +40,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
@@ -58,6 +63,13 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
     NavigationView navigationView;
     Toolbar toolbar;
 
+    double limit = 1;
+
+
+    private NotificationManagerCompat notificationManager;
+    private String editTextTitle;
+    private String editTextMessage;
+
 
     public static final String TAG = "Wydatek";
     EditText nazwaWydatku,kategoria,kwota;
@@ -77,6 +89,7 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodaj_wydatek_page);
 
+        notificationManager = NotificationManagerCompat.from(this);
 
 
 
@@ -127,6 +140,9 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
         dodajWydatekBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 String nazwaWdk = nazwaWydatku.getText().toString();
                 String category = textSpinner.toString();
                 String suma = kwota.getText().toString();
@@ -158,6 +174,10 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Log.d("PHOTOX","Udało sie przesłać zdjęcie");
+                        if (getLimit()==1)
+                        {
+                            sendOnChannel1();
+                        }
                     }
                 });
                 final StorageReference ref = storageRef.child("users/" + userID + "/wydatki/" + data);
@@ -209,6 +229,23 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
 
     }
 
+    public double getLimit() {
+        return limit;
+    }
+    public void sendOnChannel1()
+    {
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            Notification notification = new Notification.Builder(this, CHANNEL_1_ID)
+                    .setSmallIcon(R.drawable.ic_baseline_attach_money_24)
+                    .setContentTitle("Menadżer Wydatków")
+                    .setContentText("Przekroczyłeś limit wydatków!")
+                    .setPriority(Notification.PRIORITY_HIGH)
+                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                    .build();
+            notificationManager.notify(1,notification);
+        }
+    }
     //aparat
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
