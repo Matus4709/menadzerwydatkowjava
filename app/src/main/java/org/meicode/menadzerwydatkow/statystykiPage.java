@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,7 +18,17 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.navigation.NavigationView ;
+
+import java.util.ArrayList;
+
+import kotlin.jvm.internal.Lambda;
 
 public class statystykiPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,6 +41,30 @@ public class statystykiPage extends AppCompatActivity implements NavigationView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statystyki_page);
+
+        PieChart pieChart = findViewById(R.id.pieChart);
+
+        ArrayList<PieEntry> tmp = new ArrayList<>();
+        tmp.add(new PieEntry(400,"Żywność i napoje"));
+        tmp.add(new PieEntry(100,"Inne"));
+        tmp.add(new PieEntry(400,"Podatki"));
+        tmp.add(new PieEntry(350,"Transport"));
+
+        PieDataSet pieDataSet = new PieDataSet(tmp, "Kategoria");
+        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieDataSet.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueTextSize(16f);
+
+        pieChart.animateY(1000, Easing.EaseInOutCubic);
+        pieChart.setDrawHoleEnabled(false);
+        PieData pieData = new PieData(pieDataSet);
+        pieChart.setEntryLabelColor(Color.BLACK);
+        pieChart.setEntryLabelTextSize(16f);
+        pieChart.setData(pieData);
+        pieChart.getDescription().setEnabled(true);
+        pieChart.setCenterText("");
+        pieChart.animate();
+
 
 
 
