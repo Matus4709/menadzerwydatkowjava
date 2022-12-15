@@ -183,7 +183,7 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
 
                         }
                     });
-                    final StorageReference ref = storageRef.child("users/" + userID + "/wydatki/" + data);
+                    final StorageReference ref = storageRef.child("users/" + userID + "/wydatki/" + docReference.getId());
                     uploadTask = ref.putBytes(sdata);
 
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -217,7 +217,7 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                 docReference.set(wydatek).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Log.d(TAG, "Wydatek zapisany!");
+                        Log.d("TESTID", "Wydatek zapisany!"+docReference.getId());
 
                         if (getLimit()==1)
                         {
@@ -230,7 +230,7 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Nie udało się zapisać wydatku!");
+                        Log.w("TESTID", "Nie udało się zapisać wydatku!");
                     }
                 });
             }
