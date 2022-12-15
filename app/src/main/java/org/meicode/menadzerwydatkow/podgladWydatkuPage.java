@@ -9,15 +9,20 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +31,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -42,6 +52,7 @@ public class podgladWydatkuPage extends AppCompatActivity implements NavigationV
     FirebaseFirestore fStore;
     String userID;
     String wID;
+    private StorageReference mStorageReference;
 
 
     @Override
@@ -87,9 +98,27 @@ public class podgladWydatkuPage extends AppCompatActivity implements NavigationV
             }
         });
 
+        mStorageReference = FirebaseStorage.getInstance().getReference().child("users/"+ userID + "/wydatki/"+ wID);
 
-
-
+        try {
+            final File localFile = File.createTempFile(wID,"jpg");
+            mStorageReference.getFile(localFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Log.d("PHOTOX","Wczytano zdjecie!");
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            ((ImageView)findViewById(R.id.ticketView)).setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("PHOTOX","Nie udalo sie wczytac zdjecia!");
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
