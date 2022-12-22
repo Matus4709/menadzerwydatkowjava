@@ -13,6 +13,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.text.SimpleDateFormat;
+import java.util.SimpleTimeZone;
 
 public class FirestoreAdapter  extends FirestoreRecyclerAdapter<WydatkiModel, FirestoreAdapter.WydatkiViewHolder> {
 
@@ -28,8 +29,10 @@ public class FirestoreAdapter  extends FirestoreRecyclerAdapter<WydatkiModel, Fi
     protected void onBindViewHolder(@NonNull WydatkiViewHolder holder, int position, @NonNull WydatkiModel model) {
         holder.list_name.setText(model.getNazwa());
         holder.list_category.setText(model.getKategoria());
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+        SimpleDateFormat DateFor = new SimpleDateFormat("E dd.MM.yyyy  |  HH:mm");
         String stringDate= DateFor.format(model.getData());
+
+
         holder.list_date.setText(stringDate+"");
         holder.list_price.setText(model.getKwota()+"");
     }
