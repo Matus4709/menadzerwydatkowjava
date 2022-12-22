@@ -1,6 +1,7 @@
 package org.meicode.menadzerwydatkow;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -16,20 +17,27 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+
+import java.text.SimpleDateFormat;
 
 public class startPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FirestoreAdapter.OnItemClickListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    TextView saldoCounter;
 
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth fAuth;
@@ -46,6 +54,7 @@ public class startPage extends AppCompatActivity implements NavigationView.OnNav
         firebaseFirestore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
         mwydatkiList = findViewById(R.id.wydatkiList5);
+        saldoCounter = findViewById(R.id.saldoCount);
 
         userID  = fAuth.getCurrentUser().getUid();
         //Query
@@ -79,6 +88,19 @@ public class startPage extends AppCompatActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView.setCheckedItem(R.id.nav_start);
+
+
+        DocumentReference docRef = firebaseFirestore.collection("users").document(userID).collection("ustawienia").document("saldo");
+        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                saldoCounter.setText(value.getString("bilans")+" PLN");
+            }
+        });
+
+
+
+
 
         final Button DodajWydatek = findViewById(R.id.dodajWydatekBtn);
 

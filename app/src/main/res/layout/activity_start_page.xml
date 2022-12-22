@@ -46,16 +46,16 @@
 
     <TextView
         android:id="@+id/textSaldo"
-        android:layout_width="261dp"
+        android:layout_width="100dp"
         android:layout_height="42dp"
+        android:layout_marginStart="104dp"
         android:layout_weight="1"
-        android:text="SALDO: 2400 PLN"
+        android:text="SALDO:"
         android:textAlignment="center"
         android:textColor="@color/textColor"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/dodajWydatekBtn"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -95,6 +95,19 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/saldoCount"
+        android:layout_width="100dp"
+        android:layout_height="42dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toTopOf="@+id/dodajWydatekBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintStart_toEndOf="@+id/textSaldo"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
