@@ -28,7 +28,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -47,8 +50,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
+
 import android.widget.TextView;
 import android.widget.Toast;
+
+
 
 
 public class dodajWydatekPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -63,21 +69,22 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
     NavigationView navigationView;
     Toolbar toolbar;
 
-    double limit = 1;
+    private FirebaseAuth fAuth;
+    private FirestoreAdapter adapter;
+    private String userID;
 
 
     private NotificationManagerCompat notificationManager;
     private String editTextTitle;
     private String editTextMessage;
 
-
+    private FirebaseFirestore firebaseFirestore;
     public static final String TAG = "Wydatek";
     EditText nazwaWydatku,kategoria,kwota;
     Button dodajWydatekBtn;
     FirebaseFirestore fStore;
-    String userID;
-    FirebaseAuth fAuth;
     boolean zdjecietf;
+    private double dLimit;
 
 
 
@@ -89,10 +96,8 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodaj_wydatek_page);
-
+        TextView katwyd = findViewById(R.id.KategoriaWydatku);
         notificationManager = NotificationManagerCompat.from(this);
-
-
 
         //aparat
         ZdjecieButton   = findViewById(R.id.ZdjecieButton);
@@ -219,7 +224,7 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                     public void onSuccess(Void unused) {
                         Log.d("TESTID", "Wydatek zapisany!"+docReference.getId());
 
-                        if (getLimit()==1)
+                        if (getSumaWydatkow()>=getLimit())
                         {
                             sendOnChannel1();
                         }
@@ -235,13 +240,22 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                 });
             }
         });
-
-
-
+        userID = fAuth.getCurrentUser().getUid();
+        DocumentReference docRef = fStore.collection("users").document(userID).collection("ustawienia").document("limit");
+        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                String strLimit = value.getString("maxKwota");
+                dLimit = Double.parseDouble(strLimit);
+            }
+        });
     }
-
+    public double getSumaWydatkow()
+    {
+        return 130;
+    }
     public double getLimit() {
-        return limit;
+        return dLimit;
     }
     public void sendOnChannel1()
     {
