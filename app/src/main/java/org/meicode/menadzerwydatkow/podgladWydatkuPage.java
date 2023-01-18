@@ -39,6 +39,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class podgladWydatkuPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,7 +55,8 @@ public class podgladWydatkuPage extends AppCompatActivity implements NavigationV
     String userID;
     String wID;
     private StorageReference mStorageReference;
-
+    int dSaldo, dSuma;
+    String kasa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,7 @@ public class podgladWydatkuPage extends AppCompatActivity implements NavigationV
                 String string  = dateFormat.format(value.getDate("Data"));
                 data.setText(string);
                 kwota.setText(value.getString("Kwota")+" PLN");
+                kasa = value.getString("Kwota");
             }
         });
 
@@ -131,10 +135,49 @@ public class podgladWydatkuPage extends AppCompatActivity implements NavigationV
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fStore.collection("users").document(userID).collection("wydatki").document(wID).delete();
-                Intent del = new Intent(podgladWydatkuPage.this, wydatkiPage.class);
-                startActivity(del);
-                Toast.makeText(podgladWydatkuPage.this, "Usunięto wydatek!", Toast.LENGTH_SHORT).show();
+
+                Log.d("TESTSALDO", "DocumentSnapshot data: "+kasa);
+                userID = fAuth.getCurrentUser().getUid();
+                DocumentReference docRx = fStore.collection("users").document(userID).collection("ustawienia").document("saldo");
+                docRx.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        Log.d("TESTSALDO", "DocumentSnapshot data: ");
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d("TESTSALDO", "DocumentSnapshot data: " + document.getData());
+                                String test =document.getString("bilans") ;
+                                dSaldo = Integer.parseInt(test);
+                                Log.w("TESTSALDO", "Pobrano zmienna " + dSaldo);
+                                dSuma = Integer.parseInt(kasa);
+                                int dRoznica = dSaldo+dSuma;
+                                String str = Integer.toString(dRoznica);
+
+                                Log.w("TESTSALDO", "Po odjeciu " + dSaldo +" "+ dSuma +" "+ dRoznica);
+                                Map<String,Object> saldo = new HashMap<>();
+                                saldo.put("bilans",str);
+                                docRx.set(saldo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.w("TESTSALDO", "Dodano zmienna " + dSaldo +" "+ dSuma+" "+ dRoznica);
+
+                                        fStore.collection("users").document(userID).collection("wydatki").document(wID).delete();
+                                        Intent del = new Intent(podgladWydatkuPage.this, wydatkiPage.class);
+                                        startActivity(del);
+                                        Toast.makeText(podgladWydatkuPage.this, "Usunięto wydatek!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                Log.d("TESTSALDO", "No such document");
+                            }
+                        } else {
+                            Log.d("TESTSALDO", "get failed with ", task.getException());
+                        }
+                    }
+                });
+
+
             }
         });
 

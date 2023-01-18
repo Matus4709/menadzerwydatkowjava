@@ -43,9 +43,7 @@ public class FirestoreAdapter  extends FirestoreRecyclerAdapter<WydatkiModel, Fi
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_single, parent,false);
         return new WydatkiViewHolder(view);
     }
-    public void deleteWydatek(int position){
-        getSnapshots().getSnapshot(position).getReference().delete();
-    }
+
 
     public class WydatkiViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
