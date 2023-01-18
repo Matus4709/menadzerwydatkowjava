@@ -32,6 +32,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.MetadataChanges;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -85,6 +86,8 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
     FirebaseFirestore fStore;
     boolean zdjecietf;
     private double dLimit;
+    int dSaldo,dSuma;
+
 
 
 
@@ -105,6 +108,8 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
         zdjecietf = false;
 
 
+
+        dSuma = 0;
         ZdjecieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,6 +169,59 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                 wydatek.put("Kategoria", category);
                 wydatek.put("Kwota",suma);
                 wydatek.put("Data",data);
+
+
+
+                userID = fAuth.getCurrentUser().getUid();
+                DocumentReference docR = fStore.collection("users").document(userID).collection("ustawienia").document("saldo");
+                docR.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d("TESTSALDO", "DocumentSnapshot data: " + document.getData());
+                                String test =document.getString("bilans") ;
+                                dSaldo = Integer.parseInt(test);
+                                Log.w("TESTSALDO", "Pobrano zmienna " + dSaldo);
+                                dSuma = Integer.parseInt(suma);
+                                int dRoznica = dSaldo-dSuma;
+                                String str = Integer.toString(dRoznica);
+
+                                Log.w("TESTSALDO", "Po odjeciu " + dSaldo +" "+ dSuma +" "+ dRoznica);
+                                Map<String,Object> saldo = new HashMap<>();
+                                saldo.put("bilans",str);
+                                docR.set(saldo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.w("TESTSALDO", "Odjeto zmienna " + dSaldo +" "+ dSuma+" "+ dRoznica);
+                                    }
+                                });
+                            } else {
+                                Log.d("TESTSALDO", "No such document");
+                            }
+                        } else {
+                            Log.d("TESTSALDO", "get failed with ", task.getException());
+                        }
+                    }
+                });
+
+
+                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 if(zdjecietf){
                     //dodawanie zdjecia z imageview do bazy danych
@@ -229,6 +287,8 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                             sendOnChannel1();
                         }
 
+
+
                         startActivity(new Intent(getApplicationContext(),startPage.class));
 
                     }
@@ -249,6 +309,8 @@ public class dodajWydatekPage extends AppCompatActivity implements NavigationVie
                 dLimit = Double.parseDouble(strLimit);
             }
         });
+
+
     }
     public double getSumaWydatkow()
     {
